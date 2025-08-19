@@ -1,0 +1,4 @@
+pnpm check
+pnpm format
+pnpm lint
+pnpm build

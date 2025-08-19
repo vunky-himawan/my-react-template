@@ -127,15 +127,15 @@ PWA support is enabled via `vite-plugin-pwa`. The service worker is configured i
 
 ### TanStack Query
 
-TanStack Query is set up in `src/lib/tanstack/client.ts`. The `QueryClientProvider` in `src/lib/tanstack/client-provider.tsx` wraps the app to enable data fetching with hooks like `useQuery` and `useMutation`.
+TanStack Query is set up in `src/lib/tanstack-query/client.ts`. The `QueryClientProvider` in `src/app/providers/query-client.provider.tsx` wraps the app to enable data fetching with hooks like `useQuery` and `useMutation`.
 
 ### TanStack Router
 
-Routing is configured in `src/lib/tanstack/router.ts` and `src/routes`. Public routes (e.g., login) are in `src/routes/(public)/auth`, while protected routes are in `src/routes/(authenticated)`. The `routeTree.gen.ts` file suggests the use of TanStack Router for type-safe routing.
+Routing is configured in `src/lib/tanstack-router/router.ts` and `src/app/routes`. Public routes (e.g., login) are in `src/app/routes/(public)/auth`, while protected routes are in `src/app/routes/(authenticated)`. The `routeTree.gen.ts` file suggests the use of TanStack Router for type-safe routing.
 
 ### shadcn/ui
 
-Pre-installed shadcn/ui components are in src/components/ui. Customize component styles easily using [TweakCN](https://tweakcn.com/), a tool for generating and applying shadcn/ui styles. To add new components, run:
+Pre-installed shadcn/ui components are in `src/shared/ui`. Customize component styles easily using [TweakCN](https://tweakcn.com/), a tool for generating and applying shadcn/ui styles. To add new components, run:
 
 ```
 pnpm dlx shadcn@latest add <component-name>
@@ -147,11 +147,11 @@ Tailwind CSS is configured in tailwind.config.js. Global styles are in `src/inde
 
 ### Form Validation
 
-Login form validation is handled in `src/routes/(public)/auth/login/-validation/login.validation.ts`, likely using Zod for schema validation.
+Login form validation is handled in `src/features/auth/sign-in/model/sign-in-schema.ts`, likely using Zod for schema validation.
 
 ### Husky
 
-Husky manages Git hooks to ensure code is linted and formatted before commits. Configuration is in the .husky folder.
+Husky manages Git hooks to ensure code is linted and formatted before commits. Configuration is in the `.husky` folder.
 
 ### Feature-Sliced Design
 

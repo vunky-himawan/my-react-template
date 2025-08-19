@@ -8,17 +8,11 @@ import { Checkbox } from "@/shared/ui/checkbox";
 import { SignInFormSchema } from "../model/sign-in-schema";
 import { AuthFormWidget } from "@/widgets/auth/auth-form";
 
-export const SignInForm = () => {
+const Form = () => {
   const { control } = useFormContext<z.infer<typeof SignInFormSchema>>();
 
   return (
-    <AuthFormWidget
-      onSubmit={(data) => console.log(data)}
-      formSchema={SignInFormSchema}
-      defaultValues={{ email: "", password: "" }}
-      title="Login to Your Account"
-      description="Please enter your credentials to continue."
-    >
+    <>
       <FormField
         control={control}
         name="email"
@@ -84,6 +78,20 @@ export const SignInForm = () => {
         />
         Login with Google
       </Button>
+    </>
+  );
+};
+
+export const SignInForm = () => {
+  return (
+    <AuthFormWidget
+      onSubmit={(data) => console.log(data)}
+      formSchema={SignInFormSchema}
+      defaultValues={{ email: "", password: "" }}
+      title="Login to Your Account"
+      description="Please enter your credentials to continue."
+    >
+      <Form />
     </AuthFormWidget>
   );
 };

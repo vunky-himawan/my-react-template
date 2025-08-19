@@ -1,4 +1,4 @@
-# My React Vite PWA Template with TanStack Query, React Router, shadcn/ui, and Husky
+# My React Vite Template with TanStack Query, React Router, shadcn/ui, Husky and following Feature-Sliced Design
 
 This is a modern React template project built with Vite, _featuring Progressive Web App (PWA) support_ (need attention), TanStack Query (React Query), React Router, shadcn/ui, Husky and following [Feature-Sliced Design](https://feature-sliced.github.io/documentation/) for a scalable and developer-friendly front-end setup.
 
@@ -31,42 +31,6 @@ Ensure you have the following installed:
 - Node.js (version 18 or higher)
 
 - Corepack (recommended, or use npm/yarn)
-
-## Getting Started
-
-1. Clone the repository:
-
-```bash
-git clone https://github.com/ziraaa/react-shadcn-pwa-template.git
-```
-
-2. Install dependencies:
-
-```bash
-pnpm install
-```
-
-3. Start the development server:
-
-```bash
-pnpm dev
-```
-
-Open http://localhost:5173 in your browser to view the app.
-
-4. Build for production:
-
-```bash
-pnpm build
-```
-
-Production files are generated in the dist folder.
-
-5. Preview the production build:
-
-```bash
-pnpm preview
-```
 
 ## Project Structure
 
@@ -206,6 +170,42 @@ FSD is a front-end architecture pattern that divides the application into layers
 - `shared`: App-wide reusable resources: helpers, hooks, layouts, and UI components.
 
 FSD helps with scalability, clear reusability, and controlled dependencies between slices.
+
+## Getting Started
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/ziraaa/react-shadcn-pwa-template.git
+```
+
+2. Install dependencies:
+
+```bash
+pnpm install
+```
+
+3. Start the development server:
+
+```bash
+pnpm dev
+```
+
+Open http://localhost:5173 in your browser to view the app.
+
+4. Build for production:
+
+```bash
+pnpm build
+```
+
+Production files are generated in the dist folder.
+
+5. Preview the production build:
+
+```bash
+pnpm preview
+```
 
 ### Scripts
 

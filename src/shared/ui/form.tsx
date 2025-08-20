@@ -11,11 +11,7 @@ import {
 
 import { cn } from "@/shared/lib/utils";
 import { Label } from "@/shared/ui/label";
-import {
-  FormFieldContext,
-  FormItemContext,
-  useFormField,
-} from "@/shared/hooks/use-form-field";
+import { FormFieldContext, FormItemContext, useFormField } from "@/shared/hooks/use-form-field";
 
 const Form = FormProvider;
 

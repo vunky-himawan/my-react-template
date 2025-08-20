@@ -1,9 +1,5 @@
 import { SidebarProvider } from "@/app/providers/sidebar.provider";
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from "@/shared/ui/collapsible";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/shared/ui/collapsible";
 import {
   Sidebar,
   SidebarContent,

@@ -1,4 +1,7 @@
-pnpm check
-pnpm format
-pnpm lint
-pnpm build
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+pnpm check || exit 1
+pnpm format || exit 1
+pnpm lint || exit 1
+pnpm build || exit 1

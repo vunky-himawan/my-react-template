@@ -176,7 +176,7 @@ FSD helps with scalability, clear reusability, and controlled dependencies betwe
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/ziraaa/react-shadcn-pwa-template.git
+git clone https://github.com/vunky-himawan/react-vite-template.git
 ```
 
 2. Install dependencies:

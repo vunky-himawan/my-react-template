@@ -1,12 +1,12 @@
-import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/shared/ui/form";
-import { Input } from "@/shared/ui/input";
 import { useFormContext } from "react-hook-form";
 import z from "zod";
+import { SignInFormSchema } from "../model/sign-in-schema";
+import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/shared/ui/form";
+import { Input } from "@/shared/ui/input";
+import { Checkbox } from "@/shared/ui/checkbox";
 import { Button } from "@/shared/ui/button";
 import { Separator } from "@/shared/ui/separator";
-import { Checkbox } from "@/shared/ui/checkbox";
-import { SignInFormSchema } from "../model/sign-in-schema";
-import { AuthFormWidget } from "@/widgets/auth/auth-form";
+import { AuthFormWidget } from "@/widgets/form/ui/auth";
 
 const Form = () => {
   const { control } = useFormContext<z.infer<typeof SignInFormSchema>>();

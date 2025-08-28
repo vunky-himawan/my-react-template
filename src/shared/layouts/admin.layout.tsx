@@ -10,48 +10,13 @@ import {
   SidebarMenuSub,
   SidebarMenuSubItem,
 } from "@/shared/ui/sidebar";
-import { isUrlActive } from "@/shared/utils/url";
 import { Link, useLocation } from "@tanstack/react-router";
-import { ChevronDown, LayoutDashboard, Settings, Users } from "lucide-react";
-import type { FC, PropsWithChildren, ReactNode } from "react";
+import { ChevronDown } from "lucide-react";
+import type { FC, PropsWithChildren } from "react";
+import { menuItems } from "../constants/menu/admin";
+import { checkIsActive } from "../helpers/menu";
 
-type TMenuItem = {
-  label: string;
-  icon: ReactNode;
-  to?: string;
-  children?: TMenuItem[];
-};
-
-const menuItems: TMenuItem[] = [
-  {
-    label: "Dashboard",
-    icon: <LayoutDashboard />,
-    to: "/dashboard",
-  },
-  {
-    label: "Users",
-    icon: <Users />,
-    children: [
-      {
-        label: "User List",
-        icon: <Users />,
-        to: "/users/list",
-      },
-      {
-        label: "User Settings",
-        icon: <Settings />,
-        to: "/users/settings",
-      },
-    ],
-  },
-];
-
-const checkIsActive = (href: string, item: TMenuItem, mainNav = false) => {
-  if (!item.to) return false;
-  return isUrlActive(href, item.to, mainNav);
-};
-
-export const MainLayout: FC<PropsWithChildren> = ({ children }) => {
+export const AdminLayout: FC<PropsWithChildren> = ({ children }) => {
   const pathName = useLocation().pathname;
 
   return (
@@ -83,7 +48,7 @@ export const MainLayout: FC<PropsWithChildren> = ({ children }) => {
                                   asChild
                                   isActive={checkIsActive(pathName, child)}
                                 >
-                                  <Link to={child.to}>
+                                  <Link to={child.to?.toString()}>
                                     {child.icon}
                                     {child.label}
                                   </Link>
@@ -101,7 +66,7 @@ export const MainLayout: FC<PropsWithChildren> = ({ children }) => {
               return (
                 <SidebarMenuItem key={item.label}>
                   <SidebarMenuButton asChild isActive={checkIsActive(pathName, item)}>
-                    <Link to={item.to}>
+                    <Link to={item.to?.toString()}>
                       {item.icon}
                       {item.label}
                     </Link>
@@ -112,7 +77,7 @@ export const MainLayout: FC<PropsWithChildren> = ({ children }) => {
           </SidebarMenu>
         </SidebarContent>
       </Sidebar>
-      {children}
+      <div className="w-full p-2">{children}</div>
     </SidebarProvider>
   );
 };

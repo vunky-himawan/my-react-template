@@ -1,34 +1,27 @@
 import { useLocation } from "@tanstack/react-router";
+import type { FC } from "react";
+import { isUrlActive } from "@/shared/utils/url";
+import { Link } from "@tanstack/react-router";
+import React from "react";
 import {
   Breadcrumb,
   BreadcrumbItem,
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from "./breadcrumb";
-import type { FC } from "react";
-import { isUrlActive } from "@/shared/utils/url";
-import { Link } from "@tanstack/react-router";
-import React from "react";
+} from "@/shared/ui/breadcrumb";
+import type { TBreadcrumbItem } from "@/shared/types/breadcrumb";
 
-export type TBreadcrumbItem = {
-  path: string;
-  label: string;
-};
-
-interface AuthenticatedHeaderProps {
+interface AdminHeaderProps {
   breadcrumbItems: TBreadcrumbItem[];
   children: React.ReactNode;
 }
 
-export const AuthenticatedHeader: FC<AuthenticatedHeaderProps> = ({
-  breadcrumbItems,
-  children,
-}) => {
+export const AdminHeader: FC<AdminHeaderProps> = ({ breadcrumbItems, children }) => {
   const location = useLocation();
 
   return (
-    <header className="flex items-center justify-between pt-4">
+    <header className="flex items-center justify-between">
       <Breadcrumb>
         <BreadcrumbList>
           {breadcrumbItems.map((item, index) => {
@@ -38,9 +31,9 @@ export const AuthenticatedHeader: FC<AuthenticatedHeaderProps> = ({
             return (
               <React.Fragment key={item.path}>
                 {isActive ? (
-                  <BreadcrumbPage>{item.label}</BreadcrumbPage>
+                  <BreadcrumbPage className="cursor-default">{item.label}</BreadcrumbPage>
                 ) : (
-                  <BreadcrumbItem>
+                  <BreadcrumbItem className="cursor-pointer">
                     <Link to={item.path}>{item.label}</Link>
                   </BreadcrumbItem>
                 )}

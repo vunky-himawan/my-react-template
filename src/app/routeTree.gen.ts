@@ -9,13 +9,30 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as adminRouteRouteImport } from './routes/(admin)/route'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as adminRolesIndexRouteImport } from './routes/(admin)/roles/index'
+import { Route as adminDashboardIndexRouteImport } from './routes/(admin)/dashboard/index'
 import { Route as publicAuthSignInIndexRouteImport } from './routes/(public)/auth/sign-in/index'
 
+const adminRouteRoute = adminRouteRouteImport.update({
+  id: '/(admin)',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
+} as any)
+const adminRolesIndexRoute = adminRolesIndexRouteImport.update({
+  id: '/roles/',
+  path: '/roles/',
+  getParentRoute: () => adminRouteRoute,
+} as any)
+const adminDashboardIndexRoute = adminDashboardIndexRouteImport.update({
+  id: '/dashboard/',
+  path: '/dashboard/',
+  getParentRoute: () => adminRouteRoute,
 } as any)
 const publicAuthSignInIndexRoute = publicAuthSignInIndexRouteImport.update({
   id: '/(public)/auth/sign-in/',
@@ -24,39 +41,74 @@ const publicAuthSignInIndexRoute = publicAuthSignInIndexRouteImport.update({
 } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
+  '/': typeof adminRouteRouteWithChildren
+  '/dashboard': typeof adminDashboardIndexRoute
+  '/roles': typeof adminRolesIndexRoute
   '/auth/sign-in': typeof publicAuthSignInIndexRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
+  '/': typeof adminRouteRouteWithChildren
+  '/dashboard': typeof adminDashboardIndexRoute
+  '/roles': typeof adminRolesIndexRoute
   '/auth/sign-in': typeof publicAuthSignInIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/(admin)': typeof adminRouteRouteWithChildren
+  '/(admin)/dashboard/': typeof adminDashboardIndexRoute
+  '/(admin)/roles/': typeof adminRolesIndexRoute
   '/(public)/auth/sign-in/': typeof publicAuthSignInIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth/sign-in'
+  fullPaths: '/' | '/dashboard' | '/roles' | '/auth/sign-in'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth/sign-in'
-  id: '__root__' | '/' | '/(public)/auth/sign-in/'
+  to: '/' | '/dashboard' | '/roles' | '/auth/sign-in'
+  id:
+    | '__root__'
+    | '/'
+    | '/(admin)'
+    | '/(admin)/dashboard/'
+    | '/(admin)/roles/'
+    | '/(public)/auth/sign-in/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  adminRouteRoute: typeof adminRouteRouteWithChildren
   publicAuthSignInIndexRoute: typeof publicAuthSignInIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/(admin)': {
+      id: '/(admin)'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof adminRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/(admin)/roles/': {
+      id: '/(admin)/roles/'
+      path: '/roles'
+      fullPath: '/roles'
+      preLoaderRoute: typeof adminRolesIndexRouteImport
+      parentRoute: typeof adminRouteRoute
+    }
+    '/(admin)/dashboard/': {
+      id: '/(admin)/dashboard/'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof adminDashboardIndexRouteImport
+      parentRoute: typeof adminRouteRoute
     }
     '/(public)/auth/sign-in/': {
       id: '/(public)/auth/sign-in/'
@@ -68,8 +120,23 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface adminRouteRouteChildren {
+  adminDashboardIndexRoute: typeof adminDashboardIndexRoute
+  adminRolesIndexRoute: typeof adminRolesIndexRoute
+}
+
+const adminRouteRouteChildren: adminRouteRouteChildren = {
+  adminDashboardIndexRoute: adminDashboardIndexRoute,
+  adminRolesIndexRoute: adminRolesIndexRoute,
+}
+
+const adminRouteRouteWithChildren = adminRouteRoute._addFileChildren(
+  adminRouteRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  adminRouteRoute: adminRouteRouteWithChildren,
   publicAuthSignInIndexRoute: publicAuthSignInIndexRoute,
 }
 export const routeTree = rootRouteImport

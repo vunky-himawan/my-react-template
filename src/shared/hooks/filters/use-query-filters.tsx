@@ -1,8 +1,9 @@
-import { useCallback, useRef, useState } from "react";
+import { useRef } from "react";
 import { debounce } from "lodash-es";
 import { useQueryParams } from "./use-query-param";
+import { useFilters } from "./use-filters";
 
-export function useTableFilter<
+export function useQueryFilters<
   TFilters extends {
     page: number;
     perPage: number;
@@ -52,16 +53,4 @@ export function useTableFilter<
   };
 
   return { search: filters.search, handleChange, pagination, filters };
-}
-
-export function useFilters<TFilters extends Record<string, string | number | boolean | undefined>>(
-  initial: TFilters,
-) {
-  const [filters, setFilters] = useState<TFilters>(initial);
-
-  const updateFilters = useCallback((newFilters: Partial<TFilters>) => {
-    setFilters((prev) => ({ ...prev, ...newFilters }));
-  }, []);
-
-  return { filters, updateFilters };
 }

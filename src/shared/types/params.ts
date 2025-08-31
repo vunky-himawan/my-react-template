@@ -1,6 +1,6 @@
 export interface IPaginateParam {
   page?: number;
-  perPage?: number;
+  limit?: number;
 }
 
 export interface IPaginationMeta {

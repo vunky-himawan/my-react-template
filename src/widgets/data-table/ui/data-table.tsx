@@ -6,6 +6,7 @@ import { usePageCount } from "../hooks/use-page-count";
 import type { TFilterItem } from "../types/filter";
 import { FilterProvider } from "../providers/filter.provider";
 import { DataTableBody } from "./body";
+import { SearchProvider } from "@/shared/providers/search.provider";
 
 interface IDataTableProps<T> {
   enableRowSelection?: boolean;
@@ -89,15 +90,15 @@ export const DataTable = <T,>({
   return (
     <div className="flex flex-col gap-2">
       {/* Table toolbar */}
-      <FilterProvider
-        onFilterChange={handleChange?.onFilterChange}
-        search={search}
-        onSearch={handleChange?.onSearch}
-        filters={filters}
-        withSearch={withSearch}
-        placeholderSearch={placeholderSearch}
-      >
-        <DataTableToolBar />
+      <FilterProvider onFilterChange={handleChange?.onFilterChange} filters={filters}>
+        <SearchProvider
+          search={search}
+          onSearch={handleChange?.onSearch}
+          placeholderSearch={placeholderSearch}
+          withSearch={withSearch}
+        >
+          <DataTableToolBar />
+        </SearchProvider>
       </FilterProvider>
 
       {/* Table components */}

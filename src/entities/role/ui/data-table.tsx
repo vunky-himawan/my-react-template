@@ -3,12 +3,12 @@ import { roleQueries } from "../api/queries";
 import { DataTable } from "@/widgets/data-table/ui/data-table";
 import type { Role } from "../model/types";
 import { roleTableColumns } from "./table-columns";
-import { useTableFilter } from "@/shared/hooks/filters/use-table-filter";
 import { makeSource } from "@/shared/utils/data-tables/mapper";
+import { useQueryFilters } from "@/shared/hooks/filters/use-query-filters";
 
 export const RoleDataTable = () => {
   const { data, isLoading, error } = useQuery(roleQueries.paginate(1, 10));
-  const { search, pagination, handleChange, filters } = useTableFilter();
+  const { search, pagination, handleChange, filters } = useQueryFilters();
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;

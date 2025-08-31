@@ -19,15 +19,21 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "erasableSyntaxOnly": true,
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true,
 
     "types": ["vite-plugin-pwa/client"],
 
-    "baseUrl": ".",
+    "baseUrl": "src",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["*"],
+      "@/shared/*": ["shared/*"],
+      "@/ui/*": ["shared/ui/*"],
+      "@/entities/*": ["entities/*"],
+      "@/feature/*": ["feature/*"],
+      "@/widgets/*": ["widgets/*"],
+      "@/pages/*": ["pages/*"],
+      "@/config/*": ["config/*"]
     }
   },
   "include": ["src", "src/config/vite-env.d.ts"]

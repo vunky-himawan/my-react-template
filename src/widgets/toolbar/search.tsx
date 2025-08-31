@@ -1,10 +1,10 @@
 import { Button } from "@/shared/ui/button";
 import { Input } from "@/shared/ui/input";
 import { Search as SearchIcon } from "lucide-react";
-import { useFilter } from "../../providers/filter.provider";
+import { useSearch } from "@/shared/providers/search.provider";
 
 export const Search = () => {
-  const { onSearch, placeholderSearch, search } = useFilter();
+  const { onSearch, placeholderSearch, search } = useSearch();
 
   return (
     <div className="w-full flex flex-col md:flex-row items-center gap-2">

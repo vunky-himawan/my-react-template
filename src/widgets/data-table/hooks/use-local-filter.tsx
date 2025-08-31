@@ -1,5 +1,5 @@
+import { useFilters } from "@/shared/hooks/filters/use-filters";
 import { useQueryParams } from "@/shared/hooks/filters/use-query-param";
-import { useFilters } from "@/shared/hooks/filters/use-table-filter";
 import { useState } from "react";
 
 export function useLocalFilters<

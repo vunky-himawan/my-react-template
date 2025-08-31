@@ -2,8 +2,12 @@ import type { ReactNode } from "react";
 import { useForm, type DefaultValues, type Resolver } from "react-hook-form";
 import { type ZodObject, type ZodRawShape, type infer as zodInfer } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Card } from "@/shared/ui/card";
+import { CardHeader } from "@/shared/ui/card";
+import { CardTitle } from "@/shared/ui/card";
+import { CardDescription } from "@/shared/ui/card";
+import { CardContent } from "@/shared/ui/card";
 import { Form } from "@/shared/ui/form";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/shared/ui/card";
 
 interface AuthFormWidgetProps<TSchema extends ZodObject<ZodRawShape>> {
   readonly children: ReactNode;

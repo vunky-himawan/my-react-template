@@ -18,6 +18,6 @@ export const makeSource = <T>(data?: TPaginationResponse<T>) => {
 export const makePagination = (pagination: IPaginateParam) => {
   return {
     page: pagination.page ?? 1,
-    perPage: pagination.perPage ?? 10,
+    perPage: pagination.limit ?? 10,
   };
 };

@@ -1,9 +1,12 @@
-import { Search } from "./toolbar/search";
+import { Search } from "../../toolbar/search";
 import { Filters } from "./toolbar/filter";
 import { useFilter } from "../providers/filter.provider";
+import { useSearch } from "@/shared/providers/search.provider";
 
 export const DataTableToolBar = () => {
-  const { isUnknownFilter, filters, withSearch } = useFilter();
+  const { isUnknownFilter, filters } = useFilter();
+  const { withSearch } = useSearch();
+
   return (
     <>
       <div className="flex justify-between gap-2">

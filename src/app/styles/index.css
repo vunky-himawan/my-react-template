@@ -1,7 +1,12 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+@import "./font.css";
 
-@custom-variant dark (&:is(.dark *));
+@theme {
+  --font-satoshi: "Satoshi-Variable", sans-serif;
+}
+
+@custom-variant dark (&: is(.dark *));
 
 @theme inline {
   --color-background: var(--background);
@@ -158,5 +163,6 @@
   }
   body {
     @apply bg-background text-foreground;
+    @apply font-satoshi;
   }
 }

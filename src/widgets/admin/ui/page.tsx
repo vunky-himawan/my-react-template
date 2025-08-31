@@ -1,8 +1,8 @@
 import type { TBreadcrumbItem } from "@/shared/types/breadcrumb";
 import { Separator } from "@/shared/ui/separator";
 import { SidebarTrigger } from "@/shared/ui/sidebar";
+import { AdminHeader } from "@/widgets/admin/ui/header";
 import type { FC, ReactNode } from "react";
-import { AdminHeader } from "./header";
 
 interface AdminPageProps {
   breadcrumbs?: TBreadcrumbItem[];
@@ -22,7 +22,7 @@ export const AdminPage: FC<AdminPageProps> = ({
   topAction,
 }) => {
   return (
-    <div className="flex w-full flex-col gap-y-5 px-4 py-2">
+    <div className="flex w-full min-h-screen relative flex-col gap-y-5 px-4 py-2">
       <div className="flex items-center gap-3">
         <SidebarTrigger className="cursor-pointer" />
         <AdminHeader breadcrumbItems={breadcrumbs || []}>{header}</AdminHeader>
@@ -35,7 +35,7 @@ export const AdminPage: FC<AdminPageProps> = ({
         </div>
         {topAction}
       </div>
-      {children}
+      <div className="flex-1 relative">{children}</div>
     </div>
   );
 };

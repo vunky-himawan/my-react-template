@@ -1,4 +1,4 @@
-import { tanstackQueryConfig } from "@/config/env";
+import { tanstackQueryConfig } from "@/config";
 import { QueryClient } from "@tanstack/react-query";
 
 export const queryClient = new QueryClient({
@@ -6,6 +6,7 @@ export const queryClient = new QueryClient({
     queries: {
       staleTime: tanstackQueryConfig.staleTime,
       retry: tanstackQueryConfig.retry,
+      gcTime: tanstackQueryConfig.gcTime,
     },
   },
 });

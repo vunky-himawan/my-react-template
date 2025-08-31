@@ -1,7 +1,7 @@
-import { TooltipProvider } from "@/shared/ui/tooltip";
-import { createContext } from "react";
 import { useIsMobile } from "@/shared/hooks/use-mobile";
 import { cn } from "@/shared/lib/utils";
+import { TooltipProvider } from "@/shared/ui/tooltip";
+import { createContext } from "react";
 import { useCallback, useEffect, useMemo, useState } from "react";
 
 type SidebarContextProps = {

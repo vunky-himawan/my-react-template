@@ -9,5 +9,3 @@ export const tanstackQueryConfig = {
     ? parseInt(import.meta.env.VITE_TANSTACK_QUERY_GC_TIME)
     : 60000, // Default to 60 seconds
 };
-
-export const apiUrl = import.meta.env.VITE_API_BASE_URL;

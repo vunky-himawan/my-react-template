@@ -6,12 +6,7 @@ export interface IPaginateParam {
 export interface IPaginationMeta {
   itemCount: number;
   totalItems: number;
-  itemPerPage: number;
+  itemsPerPage: number;
   totalPages: number;
   currentPage: number;
 }
-
-export type TPaginationResponse<T, M = IPaginationMeta> = {
-  data: T;
-  meta: M;
-};

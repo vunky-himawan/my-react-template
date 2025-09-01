@@ -1,175 +1,162 @@
-# My React Vite Template with TanStack Query, React Router, shadcn/ui, Husky and following Feature-Sliced Design
+# My React Vite Template with TanStack Query, TanStack Router, shadcn/ui, Husky and Feature-Sliced Design
 
-This is a modern React template project built with Vite, _featuring Progressive Web App (PWA) support_ (need attention), TanStack Query (React Query), React Router, shadcn/ui, Husky and following [Feature-Sliced Design](https://feature-sliced.github.io/documentation/) for a scalable and developer-friendly front-end setup.
+This is a modern React template project built with Vite, _featuring Progressive Web App (PWA) support_ (cooming soon), TanStack Query (React Query), TanStack Router, shadcn/ui, Husky and following [Feature-Sliced Design](https://feature-sliced.github.io/documentation/) for a scalable and developer-friendly front-end setup.
 
 ## Features
 
-- Vite: Fast build tool for an optimized development experience.
+- **Vite:** Fast build tool for an optimized development experience.
 
-- Progressive Web App (PWA): Offline support, app-like installation, and service worker integration.
+- **Progressive Web App (PWA):** Offline support, app-like installation, and service worker integration (planned).
 
-- TanStack Query: Efficient API data fetching and state management.
+- **TanStack Query:** Efficient API data fetching and state management.
 
-- React Router: Declarative routing for seamless navigation.
+- **TanStack Router:** Type-safe declarative routing for seamless navigation.
 
-- shadcn/ui: Customizable, accessible UI components for rapid development.
+- **shadcn/ui:** Customizable, accessible UI components for rapid development.
 
-- TypeScript: Type-safe code for improved maintainability.
+- **TypeScript:** Type-safe code for improved maintainability.
 
-- Tailwind CSS: Utility-first CSS framework for quick UI styling.
+- **Tailwind CSS:** Utility-first CSS framework for quick UI styling.
 
-- ESLint & _Prettier (will be implemented)_: Ensure code quality and consistent formatting.
+- **ESLint & Prettier:** Ensure code quality and consistent formatting.
 
-- Husky: Git hooks for automated linting and formatting before commits.
+- **Husky:** Git hooks for automated linting and formatting before commits.
 
-- Zod: Schema validation for forms (e.g., login form validation).
+- **Zod:** Schema validation for forms (e.g., login form validation).
 
 ## Prerequisites
 
-Ensure you have the following installed:
+Make sure you have installed:
 
-- Node.js (version 18 or higher)
+- Node.js (v18 or higher)
 
-- Corepack (recommended, or use npm/yarn)
+- Corepack (recommended, or use npm/yarn/pnpm)
 
 ## Project Structure
 
 ```
-├── Dockerfile
-├── public
-├── src
-│   ├── app
-│   │   ├── providers
-│   │   │   ├── query-client.provider.tsx
-│   │   │   └── sidebar.provider.tsx
-│   │   ├── routes
-│   │   │   ├── index.tsx
-│   │   │   ├── (authenticated)
-│   │   │   │   └── route.tsx
-│   │   │   ├── (public)
-│   │   │   │   └── auth
-│   │   │   │       ├── login
-│   │   │   │       │   └── index.tsx
-│   │   │   │       └── route.tsx
-│   │   │   └── __root.tsx
-│   │   └── routeTree.gen.ts
-│   ├── config
-│   │   └── env.ts
-│   ├── entities
-│   │   └── user
-│   │       ├── api
-│   │       ├── model
-│   │       └── ui
-│   │   └── (entities)
-│   ├── features
-│   │   └── auth
-│   │       └── sign-in
-│   │           ├── api
-│   │           ├── model
-│   │           │   └── sign-in-schema.ts
-│   │           └── ui
-│   │               └── sign-in-form.tsx
-│   │   └── (features)
-│   ├── main.tsx
-│   ├── pages
-│   │   └── auth
-│   │       └── sign-in
-│   │           └── index.tsx
-│   │   └── (pages)
-│   │       └── index.tsx
-│   ├── shared
-│   │   ├── api
-│   │   │   └── client.ts
-│   │   ├── helpers
-│   │   ├── hooks
-│   │   │   ├── use-form-field.tsx
-│   │   │   ├── use-mobile.ts
-│   │   │   └── use-sidebar.tsx
-│   │   ├── layouts
-│   │   │   ├── guest.layout.tsx
-│   │   │   ├── main.layout.tsx
-│   │   │   └── ....
-│   │   ├── lib
-│   │   │   ├── axios
-│   │   │   │   └── index.ts
-│   │   │   ├── tanstack-query
-│   │   │   │   └── client.ts
-│   │   │   ├── tanstack-router
-│   │   │   │   └── router.ts
-│   │   │   └── utils.ts
-│   │   ├── ui
-│   │   │   ├── breadcrumb.tsx
-│   │   │   ├── button.tsx
-│   │   │   ├── card.tsx
+├── app
+│   ├── error
+│   │   ├── model
+│   │   ├── types
+│   │   └── ui
+│   ├── layouts
+│   ├── providers
+│   ├── routes
+│   │   ├── (admin)
+│   │   │   ├── dashboard
 │   │   │   ├── ....
-│   │   └── utils
-│   │       └── url.tsx
-│   └── widgets
-│       └── auth
-│           └── auth-form.tsx
+│   │   └── (public)
+│   │   │   └── auth
+│   │   │        └── sign-in
+│   │   │        └── ....
+│   │   │   └── ....
+│   └── styles
+├── config
+├── entities
+│   ├── <slice>
+│   │   └── api
+│   │   └── model
+│   │   └── ui
+│   └── ....
+├── features
+│   ├── <slice>
+│   │   └── api
+│   │   └── model
+│   │   └── ui
+│   └── ....
+├── pages
+│   ├── (admin)
+│   └── (public)
+│   └── ....
+├── shared
+│   ├── api
+│   ├── helpers
+│   ├── hooks
+│   ├── lib
+│   ├── stores
+│   ├── types
+│   ├── ui
+│   └── utils
+│   └── ....
+└── widgets
+    ├── <widget>
+    ├── ....
 ```
 
 #### Key Configurations
 
-- `entities`: Represents main domain objects, e.g., user. Usually contains api, model, and UI specific to the domain.
+- `/app`: Entry point of the application. Contains error boundaries, global providers, layouts, routing, and global styles.
 
-- `features`: Reusable application functionalities, e.g., sign-in. Can consume entities or widgets.
+- `/entities`: Represents main domain objects (e.g., user, role, permission). Each entity contains API, model (state, logic), and UI parts.
 
-- `pages`: Page-level components mapped to URLs. Can use features and widgets.
+- `/features`: Reusable business logic or flows (e.g., auth/sign-in, filter, admin features).
 
-- `widgets`: Small UI components that are composable and reusable across features or pages.
+- `/pages`: Route-level components mapped to URLs. Can compose entities, features, and widgets.
 
-- `shared`: Everything reusable app-wide: helpers, hooks, layouts, libraries, and common UI components.
+- `/widgets`: Complex, reusable UI blocks (e.g., data-table, form, sidebar, admin components).
 
-### Vite PWA
+- `/shared`: Global reusable resources — API client, hooks, helpers, UI primitives, utils, and state stores.
 
-PWA support is enabled via `vite-plugin-pwa`. The service worker is configured in vite.config.ts.
+- `/config`: App-wide configuration files.
 
-### TanStack Query
+## Routing
 
-TanStack Query is set up in `src/lib/tanstack-query/client.ts`. The `QueryClientProvider` in `src/app/providers/query-client.provider.tsx` wraps the app to enable data fetching with hooks like `useQuery` and `useMutation`.
+- Public routes (e.g., `auth/sign-in`) are located in `src/app/routes/(public)`.
 
-### TanStack Router
+- Admin routes (dashboard, permissions, roles) are in `src/app/routes/(admin)`.
 
-Routing is configured in `src/lib/tanstack-router/router.ts` and `src/app/routes`. Public routes (e.g., login) are in `src/app/routes/(public)/auth`, while protected routes are in `src/app/routes/(authenticated)`. The `routeTree.gen.ts` file suggests the use of TanStack Router for type-safe routing.
+- TanStack Router generates type-safe routes with `pnpm routes:generate`.
 
-### shadcn/ui
+## Data Fetching (TanStack Query)
 
-Pre-installed shadcn/ui components are in `src/shared/ui`. Customize component styles easily using [TweakCN](https://tweakcn.com/), a tool for generating and applying shadcn/ui styles. To add new components, run:
+- Query Client is defined in `src/shared/lib/tanstack-query`.
 
-```
-pnpm dlx shadcn@latest add <component-name>
-```
+- Wrapped in QueryClientProvider under `src/app/providers`.
 
-### Tailwind CSS
+- Fetch data using `useQuery` and `useMutation`.
 
-Tailwind CSS is configured in tailwind.config.js. Global styles are in `src/index.css`.
+## UI Layer (shadcn/ui + Tailwind)
 
-### Form Validation
+- Pre-installed shadcn/ui components under `src/shared/ui`.
 
-Login form validation is handled in `src/features/auth/sign-in/model/sign-in-schema.ts`, likely using Zod for schema validation.
+- Tailwind CSS is configured in `tailwind.config.js`.
 
-### Husky
+- Global styles are under `src/app/styles`.
 
-Husky manages Git hooks to ensure code is linted and formatted before commits. Configuration is in the `.husky` folder.
+## Form Validation (Zod)
 
-### Feature-Sliced Design
+- Example: login schema with Zod in `src/features/auth/sign-in/model`.
 
-FSD is a front-end architecture pattern that divides the application into layers and slices:
+## Husky
 
-- `app`: App entry point, global providers, and routing configuration.
+- Git hooks are set up in `.husky`.
 
-- `pages`: URL mapped pages, can compose features and widgets.
+- Automatically runs `lint`, `format`, `build`, and etc on commit.
 
-- `features`: Reusable functionalities, focused on user flows or specific use cases.
+## Featured-Slice Design
 
-- `entities`: Domain-level objects (e.g., User, Project). Contains model, API, and domain-specific UI.
+This project follows [Feature-Sliced Design (FSD)](https://feature-sliced.github.io/documentation/), a front-end architecture pattern that divides the app into layers and slices for scalability and maintainability.
 
-- `widgets`: Small composable UI components for cross-feature usage.
+### Decision Trees
 
-- `shared`: App-wide reusable resources: helpers, hooks, layouts, and UI components.
+To help guide where logic, types, or UI should be placed, this project includes decision tree diagrams:
 
-FSD helps with scalability, clear reusability, and controlled dependencies between slices.
+#### Logic Decision Tree
+
+![Logic](https://github.com/user-attachments/assets/48f106c1-9045-4e56-91e8-dd7c76a5d288)
+
+#### Types Decision Tree
+
+![Types](https://github.com/user-attachments/assets/7fad0560-9312-4b13-8e8c-c247aa6ac828)
+
+#### UI Component Decision Tree
+
+![UI Component](https://github.com/user-attachments/assets/5f3bc58c-1aed-4ce1-afaf-f9bc27e71c6a)
+
+These diagrams serve as practical references when deciding in which layer (entities, features, widgets, shared) a piece of code should live.
+
+![Architecture](https://github.com/user-attachments/assets/b8bc3aed-cfe9-40b7-847a-d0c3d2327ea6)
 
 ## Getting Started
 
@@ -207,7 +194,7 @@ Production files are generated in the dist folder.
 pnpm preview
 ```
 
-### Scripts
+## Scripts
 
 - `pnpm dev`: Start the development server.
 

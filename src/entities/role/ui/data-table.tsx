@@ -3,8 +3,8 @@ import { roleQueries } from "../api/queries";
 import { DataTable } from "@/widgets/data-table/ui/data-table";
 import type { Role } from "../model/types";
 import { roleTableColumns } from "./table-columns";
-import { makeSource } from "@/shared/utils/data-tables/mapper";
-import { useQueryFilters } from "@/shared/hooks/filters/use-query-filters";
+import { makeSource } from "@/shared/utils/pagination";
+import { useQueryFilters } from "@/features/filter/model/use-query-filters";
 
 export const RoleDataTable = () => {
   const { data, isLoading, error } = useQuery(roleQueries.paginate(1, 10));

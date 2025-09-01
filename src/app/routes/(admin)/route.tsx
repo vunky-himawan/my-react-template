@@ -1,4 +1,4 @@
-import { AdminLayout } from "@/shared/layouts/admin.layout";
+import { AdminLayout } from "@/app/layouts/admin.layout";
 import { createFileRoute, Outlet } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/(admin)")({

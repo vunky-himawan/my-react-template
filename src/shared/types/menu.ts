@@ -9,4 +9,5 @@ export type TMenuItem = {
     | FileRoutesByFullPath[keyof FileRoutesByFullPath]["fullPath"]
     | FileRoutesByPath[keyof FileRoutesByPath]["path"];
   children?: TMenuItem[];
+  requiredPermission?: string | string[] | null;
 };

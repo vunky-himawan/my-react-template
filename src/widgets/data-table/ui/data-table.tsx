@@ -1,36 +1,26 @@
 import { getCoreRowModel, useReactTable, type ColumnDef } from "@tanstack/react-table";
 import { Checkbox } from "@/shared/ui/checkbox";
-import { DataTableToolBar } from "./tool-bar";
-import { DataTablePagination } from "./pagination";
-import { usePageCount } from "../hooks/use-page-count";
-import type { TFilterItem } from "../types/filter";
-import { FilterProvider } from "../providers/filter.provider";
-import { DataTableBody } from "./body";
-import { SearchProvider } from "@/shared/providers/search.provider";
+import { PaginationControl } from "@/shared/ui/pagination";
+import { Search } from "@/shared/ui/search";
+import type { TFilterItem } from "@/shared/types/filter";
+import { TanstackTableView } from "@/shared/ui/table/tanstack-table-view";
+import type { IPaginateParam } from "@/shared/types/params";
+import { FilterControl } from "@/features/filter/ui/filter-control";
+import type { TSource } from "@/shared/types/pagination";
 
 interface IDataTableProps<T> {
   enableRowSelection?: boolean;
   columns: ColumnDef<T>[];
-  source?: {
-    data?: T[];
-    meta?: {
-      current?: number;
-      pageSize?: number;
-      total?: number;
-    };
-  };
+  source?: TSource<T[]>;
   filters?: TFilterItem[];
   search?: string;
   withSearch?: boolean;
   placeholderSearch?: string;
-  pagination: {
-    page: number;
-    perPage: number;
-  };
+  pagination?: IPaginateParam;
   handleChange?: {
     onFilterChange: (newFilters: Record<string, string | number | undefined>) => void;
     onSortingChange: (sortKey: string, order: "asc" | "desc") => void;
-    onPaginationChange: (page: number, perPage: number) => void;
+    onPaginationChange: (page: number, limit: number) => void;
     onSearch: (searchTerm: string) => void;
   };
 }
@@ -46,8 +36,7 @@ export const DataTable = <T,>({
   handleChange,
   pagination,
 }: IDataTableProps<T>) => {
-  const { data } = source || {};
-  const pageCount = usePageCount(source?.meta?.total, pagination.perPage);
+  const { data, meta } = source || {};
 
   const selectableColumn: ColumnDef<T> = {
     id: "select",
@@ -75,11 +64,11 @@ export const DataTable = <T,>({
     data: data || [],
     columns: enableRowSelection ? [selectableColumn, ...columns] : columns,
     getCoreRowModel: getCoreRowModel(),
-    pageCount,
+    pageCount: meta?.totalPages,
     state: {
       pagination: {
-        pageIndex: pagination.page,
-        pageSize: pagination.perPage,
+        pageIndex: pagination?.page || 1,
+        pageSize: pagination?.limit || 10,
       },
     },
     manualPagination: true,
@@ -90,29 +79,35 @@ export const DataTable = <T,>({
   return (
     <div className="flex flex-col gap-2">
       {/* Table toolbar */}
-      <FilterProvider onFilterChange={handleChange?.onFilterChange} filters={filters}>
-        <SearchProvider
-          search={search}
-          onSearch={handleChange?.onSearch}
-          placeholderSearch={placeholderSearch}
-          withSearch={withSearch}
-        >
-          <DataTableToolBar />
-        </SearchProvider>
-      </FilterProvider>
+      <div className="flex justify-between gap-2">
+        {/* Filter component */}
+        {filters && (
+          <FilterControl filterItems={filters} onFilterChange={handleChange?.onFilterChange} />
+        )}
+
+        {/* Search components */}
+        {withSearch && (
+          <Search
+            onSearch={handleChange?.onSearch}
+            search={search}
+            placeholderSearch={placeholderSearch}
+          />
+        )}
+      </div>
 
       {/* Table components */}
       <div className="overflow-hidden rounded-md border my-2">
-        <DataTableBody table={table} />
+        <TanstackTableView table={table} />
       </div>
 
       {/* Pagination */}
       <div className="flex justify-end flex-col items-center gap-2 md:flex-row">
-        <DataTablePagination
-          table={table}
-          onPaginationChange={handleChange?.onPaginationChange ?? (() => {})}
-          total={source?.meta?.total ?? 0}
-        />
+        {meta && (
+          <PaginationControl
+            paginationMeta={meta}
+            onPaginationChange={handleChange?.onPaginationChange ?? (() => {})}
+          />
+        )}
       </div>
     </div>
   );

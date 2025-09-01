@@ -7,6 +7,7 @@ export const router = createRouter({
   routeTree,
   defaultNotFoundComponent: () => {
     useErrorStore.getState().setError(new PageNotFound());
+    return null;
   },
 });
 

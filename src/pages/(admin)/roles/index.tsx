@@ -1,6 +1,6 @@
 import { RoleDataTable } from "@/entities/role/ui/data-table";
 import { Button } from "@/shared/ui/button";
-import { AdminPage } from "@/widgets/admin/ui/page";
+import { AdminPage } from "@/widgets/admin/ui/container";
 import { Link } from "@tanstack/react-router";
 
 export const RolesPage = () => {

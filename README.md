@@ -138,6 +138,10 @@ Make sure you have installed:
 
 This project follows [Feature-Sliced Design (FSD)](https://feature-sliced.github.io/documentation/), a front-end architecture pattern that divides the app into layers and slices for scalability and maintainability.
 
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/8bb6ffdb-0996-4e2d-aa44-3ac74016cfa9" width="200" height="800" />
+</p>
+
 ### Decision Trees
 
 To help guide where logic, types, or UI should be placed, this project includes decision tree diagrams:
@@ -155,8 +159,6 @@ To help guide where logic, types, or UI should be placed, this project includes 
 ![UI Component](https://github.com/user-attachments/assets/5f3bc58c-1aed-4ce1-afaf-f9bc27e71c6a)
 
 These diagrams serve as practical references when deciding in which layer (entities, features, widgets, shared) a piece of code should live.
-
-![Architecture](https://github.com/user-attachments/assets/b8bc3aed-cfe9-40b7-847a-d0c3d2327ea6)
 
 ## Getting Started
 

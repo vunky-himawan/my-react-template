@@ -1,6 +1,7 @@
-import { appConfig } from "@/config";
-import { ERROR_MESSAGES, type AppError } from "../types";
 import { mapError, mapErrorToEnum } from "./mapper";
+import type { AppError } from "@/shared/types/error";
+import { ERROR_MESSAGES } from "./const";
+import { appConfig } from "@/config/app";
 
 export const errorHandler = (error: AppError) => {
   const isDev = appConfig.env === "development";

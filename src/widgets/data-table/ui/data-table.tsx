@@ -1,12 +1,12 @@
 import { getCoreRowModel, useReactTable, type ColumnDef } from "@tanstack/react-table";
 import { Checkbox } from "@/shared/ui/checkbox";
-import { PaginationControl } from "@/shared/ui/pagination";
 import { Search } from "@/shared/ui/search";
 import type { TFilterItem } from "@/shared/types/filter";
 import { TanstackTableView } from "@/shared/ui/table/tanstack-table-view";
-import type { IPaginateParam } from "@/shared/types/params";
-import { FilterControl } from "@/features/filter/ui/filter-control";
 import type { TSource } from "@/shared/types/pagination";
+import type { TBaseQueryParams } from "@/shared/types/query-params";
+import { PaginationControl } from "@/shared/ui/pagination/pagination-control";
+import { FilterControl } from "@/features/filter";
 
 interface IDataTableProps<T> {
   enableRowSelection?: boolean;
@@ -16,7 +16,7 @@ interface IDataTableProps<T> {
   search?: string;
   withSearch?: boolean;
   placeholderSearch?: string;
-  pagination?: IPaginateParam;
+  pagination?: Omit<TBaseQueryParams, "search">;
   handleChange?: {
     onFilterChange: (newFilters: Record<string, string | number | undefined>) => void;
     onSortingChange: (sortKey: string, order: "asc" | "desc") => void;

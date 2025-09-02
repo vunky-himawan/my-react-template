@@ -1,5 +1,5 @@
 import type { makeSource } from "../utils/pagination";
-import type { IPaginationMeta } from "./params";
+import type { IPaginationMeta } from "./query-params";
 
 export type TPaginationResponse<T, M = IPaginationMeta> = {
   data: T;

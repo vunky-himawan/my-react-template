@@ -1,6 +1,5 @@
-import { permissionQueries } from "@/entities/permission/api/queries";
-import { ListPermission } from "@/entities/permission/ui/list-permission";
-import { useQueryFilters } from "@/features/filter/model/use-query-filters";
+import { ListPermission, permissionQueries } from "@/entities/permission";
+import { useQueryFilters } from "@/features/filter";
 import { makePagination } from "@/shared/utils/pagination";
 import { AdminPage } from "@/widgets/admin/ui/container";
 import { useQuery } from "@tanstack/react-query";
@@ -11,6 +10,7 @@ export const PermissionsPage = () => {
   const { isLoading, data } = useQuery(
     permissionQueries.findMany({
       ...makePagination(pagination),
+      search,
     }),
   );
 

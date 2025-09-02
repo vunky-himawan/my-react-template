@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import type { AppError } from "@/app/error/types";
+import type { AppError } from "../types/error";
 
 interface IErrorState {
   error: AppError | null;

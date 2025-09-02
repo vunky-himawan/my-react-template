@@ -1,5 +1,5 @@
 import { SidebarProvider } from "@/app/providers/sidebar.provider";
-import { ADMIN_MENU_ITEMS } from "@/features/admin/model/menu";
+import { ADMIN_MENU_ITEMS } from "@/features/admin";
 import { SidebarWidget } from "@/widgets/sidebar/ui/sidebar";
 import type { FC, PropsWithChildren } from "react";
 

@@ -1,7 +1,6 @@
 import { useFormContext } from "react-hook-form";
 import z from "zod";
 import { SignInFormSchema } from "../model/sign-in-schema";
-import { AuthFormWidget } from "@/widgets/form/ui/auth";
 import { FormControl, FormField, FormLabel, FormMessage } from "@/shared/ui/form";
 import { FormItem } from "@/shared/ui/form";
 import { Input } from "@/shared/ui/input";
@@ -85,14 +84,14 @@ const Form = () => {
 
 export const SignInForm = () => {
   return (
-    <AuthFormWidget
-      onSubmit={(data) => console.log(data)}
-      formSchema={SignInFormSchema}
-      defaultValues={{ email: "", password: "" }}
-      title="Login to Your Account"
-      description="Please enter your credentials to continue."
-    >
-      <Form />
-    </AuthFormWidget>
+    // <AuthFormWidget
+    //   onSubmit={(data) => console.log(data)}
+    //   formSchema={SignInFormSchema}
+    //   defaultValues={{ email: "", password: "" }}
+    //   title="Login to Your Account"
+    //   description="Please enter your credentials to continue."
+    // >
+    <Form />
+    // </AuthFormWidget>
   );
 };

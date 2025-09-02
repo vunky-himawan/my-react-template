@@ -1,4 +1,4 @@
-import { APP_ERROR_ENUM } from "./enum";
+import { APP_ERROR_ENUM } from "@/shared/enum/error";
 
 export const ERROR_MESSAGES: Record<APP_ERROR_ENUM, string> = {
   [APP_ERROR_ENUM.INTERNAL_SERVER_ERROR]:

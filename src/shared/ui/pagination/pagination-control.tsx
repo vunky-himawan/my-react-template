@@ -1,5 +1,5 @@
 import { useResponsive } from "@/shared/hooks/use-responsive";
-import type { IPaginationMeta } from "@/shared/types/params";
+import type { IPaginationMeta } from "@/shared/types/query-params";
 import { Button } from "../button";
 import { Pagination, PaginationContent, PaginationItem } from "./pagination";
 import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from "lucide-react";

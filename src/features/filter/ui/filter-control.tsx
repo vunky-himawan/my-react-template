@@ -2,9 +2,9 @@ import { useState, type FC } from "react";
 import { useFilters } from "@/shared/hooks/filters/use-filters";
 import { useQueryParams } from "@/shared/hooks/filters/use-query-params";
 import type { TFilterItem } from "@/shared/types/filter";
-import type { TLocalFilter } from "../model/types";
 import { FilterPanel } from "@/shared/ui/filter/filter-panel";
 import { FilterItem } from "@/shared/ui/filter/filter-item";
+import type { TLocalFilter } from "../model";
 
 interface Props {
   filterItems?: TFilterItem[];

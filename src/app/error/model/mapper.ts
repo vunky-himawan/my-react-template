@@ -1,10 +1,6 @@
-import {
-  APP_ERROR_ENUM,
-  AXIOS_CODE_MAPPING,
-  STATUS_CODE_MAPPING,
-  type AppError,
-  type ErrorResponse,
-} from "../types";
+import type { AppError, ErrorResponse } from "@/shared/types/error";
+import { APP_ERROR_ENUM } from "@/shared/enum/error";
+import { AXIOS_CODE_MAPPING, STATUS_CODE_MAPPING } from "./const";
 
 export const mapError = (error: AppError): ErrorResponse => {
   return {

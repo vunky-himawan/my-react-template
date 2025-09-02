@@ -1,5 +1,8 @@
-import { tanstackQueryConfig } from "@/config";
-import { QueryClient } from "@tanstack/react-query";
+import { tanstackQueryConfig } from "@/config/tanstack";
+import { useErrorStore } from "@/shared/stores/error.store";
+import { MutationCache, QueryCache, QueryClient } from "@tanstack/react-query";
+import type { AxiosError } from "axios";
+import { CustomAxiosAppError } from "../axios/types";
 
 export const queryClient = new QueryClient({
   defaultOptions: {
@@ -9,4 +12,14 @@ export const queryClient = new QueryClient({
       gcTime: tanstackQueryConfig.gcTime,
     },
   },
+  queryCache: new QueryCache({
+    onError: (error) => {
+      useErrorStore.getState().setError(new CustomAxiosAppError(error as AxiosError));
+    },
+  }),
+  mutationCache: new MutationCache({
+    onError: (error) => {
+      useErrorStore.getState().setError(new CustomAxiosAppError(error as AxiosError));
+    },
+  }),
 });

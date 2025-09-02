@@ -1,14 +1,13 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./styles/index.css";
-import { RouterProvider } from "@tanstack/react-router";
 import { QueryClientProvider } from "./providers/query-client.provider";
-import { router } from "@/shared/lib/tanstack-router/router";
-import * as Sentry from "@sentry/browser";
-import { sentryConfig } from "@/config";
+import { init as SentryInit } from "@sentry/browser";
 import { GlobalErrorListener } from "./error/ui/global-listener";
+import { RouterProvider } from "./providers/router.provider";
+import { sentryConfig } from "@/config/sentry";
 
-Sentry.init({
+SentryInit({
   dsn: sentryConfig.dsn,
   // TODO: Configure Sentry
 });
@@ -17,7 +16,7 @@ createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <QueryClientProvider>
       <GlobalErrorListener />
-      <RouterProvider router={router} />
+      <RouterProvider />
     </QueryClientProvider>
   </StrictMode>,
 );

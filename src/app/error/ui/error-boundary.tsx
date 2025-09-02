@@ -1,8 +1,8 @@
 import { type FC, type PropsWithChildren } from "react";
 import { Centered } from "@/shared/ui/centered";
 import { Button } from "@/shared/ui/button";
-import { type AppError } from "../types";
 import "./styles.css";
+import type { AppError } from "@/shared/types/error";
 
 interface IErrorBoundaryProps extends PropsWithChildren {
   error: AppError | null;

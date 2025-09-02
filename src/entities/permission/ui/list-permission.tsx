@@ -1,10 +1,10 @@
-import { type FC } from "react";
-import { Loading } from "@/shared/ui/loading";
-import type { Permission } from "../model";
-import { PermissionCard } from "./card";
-import { Search } from "@/shared/ui/search";
-import { PaginationControl } from "@/shared/ui/pagination";
 import type { TSource } from "@/shared/types/pagination";
+import type { Permission } from "../model";
+import type { FC } from "react";
+import { Search } from "@/shared/ui/search";
+import { Loading } from "@/shared/ui/loading";
+import { PermissionCard } from "./card";
+import { PaginationControl } from "@/shared/ui/pagination/pagination-control";
 
 interface Props {
   data?: TSource<Permission[]>;

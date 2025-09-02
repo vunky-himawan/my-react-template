@@ -11,7 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as adminRouteRouteImport } from './routes/(admin)/route'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as adminRolesIndexRouteImport } from './routes/(admin)/roles/index'
+import { Route as publicAuthRouteRouteImport } from './routes/(public)/auth/route'
 import { Route as adminPermissionsIndexRouteImport } from './routes/(admin)/permissions/index'
 import { Route as adminDashboardIndexRouteImport } from './routes/(admin)/dashboard/index'
 import { Route as publicAuthSignInIndexRouteImport } from './routes/(public)/auth/sign-in/index'
@@ -25,10 +25,10 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const adminRolesIndexRoute = adminRolesIndexRouteImport.update({
-  id: '/roles/',
-  path: '/roles/',
-  getParentRoute: () => adminRouteRoute,
+const publicAuthRouteRoute = publicAuthRouteRouteImport.update({
+  id: '/(public)/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const adminPermissionsIndexRoute = adminPermissionsIndexRouteImport.update({
   id: '/permissions/',
@@ -41,53 +41,53 @@ const adminDashboardIndexRoute = adminDashboardIndexRouteImport.update({
   getParentRoute: () => adminRouteRoute,
 } as any)
 const publicAuthSignInIndexRoute = publicAuthSignInIndexRouteImport.update({
-  id: '/(public)/auth/sign-in/',
-  path: '/auth/sign-in/',
-  getParentRoute: () => rootRouteImport,
+  id: '/sign-in/',
+  path: '/sign-in/',
+  getParentRoute: () => publicAuthRouteRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof adminRouteRouteWithChildren
+  '/auth': typeof publicAuthRouteRouteWithChildren
   '/dashboard': typeof adminDashboardIndexRoute
   '/permissions': typeof adminPermissionsIndexRoute
-  '/roles': typeof adminRolesIndexRoute
   '/auth/sign-in': typeof publicAuthSignInIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof adminRouteRouteWithChildren
+  '/auth': typeof publicAuthRouteRouteWithChildren
   '/dashboard': typeof adminDashboardIndexRoute
   '/permissions': typeof adminPermissionsIndexRoute
-  '/roles': typeof adminRolesIndexRoute
   '/auth/sign-in': typeof publicAuthSignInIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/(admin)': typeof adminRouteRouteWithChildren
+  '/(public)/auth': typeof publicAuthRouteRouteWithChildren
   '/(admin)/dashboard/': typeof adminDashboardIndexRoute
   '/(admin)/permissions/': typeof adminPermissionsIndexRoute
-  '/(admin)/roles/': typeof adminRolesIndexRoute
   '/(public)/auth/sign-in/': typeof publicAuthSignInIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/dashboard' | '/permissions' | '/roles' | '/auth/sign-in'
+  fullPaths: '/' | '/auth' | '/dashboard' | '/permissions' | '/auth/sign-in'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/dashboard' | '/permissions' | '/roles' | '/auth/sign-in'
+  to: '/' | '/auth' | '/dashboard' | '/permissions' | '/auth/sign-in'
   id:
     | '__root__'
     | '/'
     | '/(admin)'
+    | '/(public)/auth'
     | '/(admin)/dashboard/'
     | '/(admin)/permissions/'
-    | '/(admin)/roles/'
     | '/(public)/auth/sign-in/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   adminRouteRoute: typeof adminRouteRouteWithChildren
-  publicAuthSignInIndexRoute: typeof publicAuthSignInIndexRoute
+  publicAuthRouteRoute: typeof publicAuthRouteRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -106,12 +106,12 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/(admin)/roles/': {
-      id: '/(admin)/roles/'
-      path: '/roles'
-      fullPath: '/roles'
-      preLoaderRoute: typeof adminRolesIndexRouteImport
-      parentRoute: typeof adminRouteRoute
+    '/(public)/auth': {
+      id: '/(public)/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof publicAuthRouteRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/(admin)/permissions/': {
       id: '/(admin)/permissions/'
@@ -129,10 +129,10 @@ declare module '@tanstack/react-router' {
     }
     '/(public)/auth/sign-in/': {
       id: '/(public)/auth/sign-in/'
-      path: '/auth/sign-in'
+      path: '/sign-in'
       fullPath: '/auth/sign-in'
       preLoaderRoute: typeof publicAuthSignInIndexRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof publicAuthRouteRoute
     }
   }
 }
@@ -140,23 +140,33 @@ declare module '@tanstack/react-router' {
 interface adminRouteRouteChildren {
   adminDashboardIndexRoute: typeof adminDashboardIndexRoute
   adminPermissionsIndexRoute: typeof adminPermissionsIndexRoute
-  adminRolesIndexRoute: typeof adminRolesIndexRoute
 }
 
 const adminRouteRouteChildren: adminRouteRouteChildren = {
   adminDashboardIndexRoute: adminDashboardIndexRoute,
   adminPermissionsIndexRoute: adminPermissionsIndexRoute,
-  adminRolesIndexRoute: adminRolesIndexRoute,
 }
 
 const adminRouteRouteWithChildren = adminRouteRoute._addFileChildren(
   adminRouteRouteChildren,
 )
 
+interface publicAuthRouteRouteChildren {
+  publicAuthSignInIndexRoute: typeof publicAuthSignInIndexRoute
+}
+
+const publicAuthRouteRouteChildren: publicAuthRouteRouteChildren = {
+  publicAuthSignInIndexRoute: publicAuthSignInIndexRoute,
+}
+
+const publicAuthRouteRouteWithChildren = publicAuthRouteRoute._addFileChildren(
+  publicAuthRouteRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   adminRouteRoute: adminRouteRouteWithChildren,
-  publicAuthSignInIndexRoute: publicAuthSignInIndexRoute,
+  publicAuthRouteRoute: publicAuthRouteRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

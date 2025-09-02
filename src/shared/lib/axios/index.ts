@@ -1,4 +1,4 @@
-import { appConfig } from "@/config";
+import { appConfig } from "@/config/app";
 import axios from "axios";
 
 export const client = axios.create({

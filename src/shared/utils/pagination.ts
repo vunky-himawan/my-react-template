@@ -1,5 +1,5 @@
 import type { TPaginationResponse } from "@/shared/types/pagination";
-import type { IPaginateParam } from "@/shared/types/params";
+import type { TBaseQueryParams } from "../types/query-params";
 
 export const makeSource = <T>(data?: TPaginationResponse<T>) => {
   return {
@@ -8,7 +8,7 @@ export const makeSource = <T>(data?: TPaginationResponse<T>) => {
   };
 };
 
-export const makePagination = (pagination: IPaginateParam) => {
+export const makePagination = (pagination: Omit<TBaseQueryParams, "search">) => {
   return {
     page: pagination.page ?? 1,
     limit: pagination.limit ?? 10,

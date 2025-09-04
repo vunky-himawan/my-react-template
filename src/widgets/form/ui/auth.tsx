@@ -7,7 +7,7 @@ import { CardHeader } from "@/shared/ui/card";
 import { CardTitle } from "@/shared/ui/card";
 import { CardDescription } from "@/shared/ui/card";
 import { CardContent } from "@/shared/ui/card";
-import { Form } from "@/shared/ui/form";
+import { Form } from "@/shared/ui/form/form";
 
 interface AuthFormWidgetProps<TSchema extends ZodObject<ZodRawShape>> {
   readonly children: ReactNode;
@@ -18,7 +18,7 @@ interface AuthFormWidgetProps<TSchema extends ZodObject<ZodRawShape>> {
   readonly defaultValues: DefaultValues<zodInfer<TSchema>>;
 }
 
-export const AuthFormWidget = <TSchema extends ZodObject<ZodRawShape>>({
+export const DynamicForm = <TSchema extends ZodObject<ZodRawShape>>({
   children,
   onSubmit,
   formSchema,

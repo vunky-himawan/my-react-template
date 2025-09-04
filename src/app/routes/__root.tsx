@@ -2,6 +2,7 @@ import { Outlet, createRootRoute } from "@tanstack/react-router";
 import { ErrorBoundary } from "../error/ui/error-boundary";
 import { useErrorStore } from "@/shared/stores/error.store";
 import { errorHandler } from "../error/model/handler";
+import { Toaster } from "@/shared/ui/sonner";
 
 export const Route = createRootRoute({
   component: RootComponent,
@@ -19,6 +20,7 @@ function RootComponent() {
       statusCode={errorData?.statusCode}
     >
       <Outlet />
+      <Toaster />
     </ErrorBoundary>
   );
 }

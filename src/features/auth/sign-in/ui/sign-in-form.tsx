@@ -1,8 +1,8 @@
 import { useFormContext } from "react-hook-form";
 import z from "zod";
 import { SignInFormSchema } from "../model/sign-in-schema";
-import { FormControl, FormField, FormLabel, FormMessage } from "@/shared/ui/form";
-import { FormItem } from "@/shared/ui/form";
+import { FormControl, FormField, FormLabel, FormMessage } from "@/shared/ui/form/form";
+import { FormItem } from "@/shared/ui/form/form";
 import { Input } from "@/shared/ui/input";
 import { Checkbox } from "@/shared/ui/checkbox";
 import { Button } from "@/shared/ui/button";

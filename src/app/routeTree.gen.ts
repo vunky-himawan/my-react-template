@@ -15,6 +15,7 @@ import { Route as publicAuthRouteRouteImport } from './routes/(public)/auth/rout
 import { Route as adminPermissionsIndexRouteImport } from './routes/(admin)/permissions/index'
 import { Route as adminDashboardIndexRouteImport } from './routes/(admin)/dashboard/index'
 import { Route as publicAuthSignInIndexRouteImport } from './routes/(public)/auth/sign-in/index'
+import { Route as adminPermissionsPermissionIdUpdateIndexRouteImport } from './routes/(admin)/permissions/$permissionId/update/index'
 
 const adminRouteRoute = adminRouteRouteImport.update({
   id: '/(admin)',
@@ -45,6 +46,12 @@ const publicAuthSignInIndexRoute = publicAuthSignInIndexRouteImport.update({
   path: '/sign-in/',
   getParentRoute: () => publicAuthRouteRoute,
 } as any)
+const adminPermissionsPermissionIdUpdateIndexRoute =
+  adminPermissionsPermissionIdUpdateIndexRouteImport.update({
+    id: '/permissions/$permissionId/update/',
+    path: '/permissions/$permissionId/update/',
+    getParentRoute: () => adminRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof adminRouteRouteWithChildren
@@ -52,6 +59,7 @@ export interface FileRoutesByFullPath {
   '/dashboard': typeof adminDashboardIndexRoute
   '/permissions': typeof adminPermissionsIndexRoute
   '/auth/sign-in': typeof publicAuthSignInIndexRoute
+  '/permissions/$permissionId/update': typeof adminPermissionsPermissionIdUpdateIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof adminRouteRouteWithChildren
@@ -59,6 +67,7 @@ export interface FileRoutesByTo {
   '/dashboard': typeof adminDashboardIndexRoute
   '/permissions': typeof adminPermissionsIndexRoute
   '/auth/sign-in': typeof publicAuthSignInIndexRoute
+  '/permissions/$permissionId/update': typeof adminPermissionsPermissionIdUpdateIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -68,12 +77,25 @@ export interface FileRoutesById {
   '/(admin)/dashboard/': typeof adminDashboardIndexRoute
   '/(admin)/permissions/': typeof adminPermissionsIndexRoute
   '/(public)/auth/sign-in/': typeof publicAuthSignInIndexRoute
+  '/(admin)/permissions/$permissionId/update/': typeof adminPermissionsPermissionIdUpdateIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth' | '/dashboard' | '/permissions' | '/auth/sign-in'
+  fullPaths:
+    | '/'
+    | '/auth'
+    | '/dashboard'
+    | '/permissions'
+    | '/auth/sign-in'
+    | '/permissions/$permissionId/update'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/dashboard' | '/permissions' | '/auth/sign-in'
+  to:
+    | '/'
+    | '/auth'
+    | '/dashboard'
+    | '/permissions'
+    | '/auth/sign-in'
+    | '/permissions/$permissionId/update'
   id:
     | '__root__'
     | '/'
@@ -82,6 +104,7 @@ export interface FileRouteTypes {
     | '/(admin)/dashboard/'
     | '/(admin)/permissions/'
     | '/(public)/auth/sign-in/'
+    | '/(admin)/permissions/$permissionId/update/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -134,17 +157,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof publicAuthSignInIndexRouteImport
       parentRoute: typeof publicAuthRouteRoute
     }
+    '/(admin)/permissions/$permissionId/update/': {
+      id: '/(admin)/permissions/$permissionId/update/'
+      path: '/permissions/$permissionId/update'
+      fullPath: '/permissions/$permissionId/update'
+      preLoaderRoute: typeof adminPermissionsPermissionIdUpdateIndexRouteImport
+      parentRoute: typeof adminRouteRoute
+    }
   }
 }
 
 interface adminRouteRouteChildren {
   adminDashboardIndexRoute: typeof adminDashboardIndexRoute
   adminPermissionsIndexRoute: typeof adminPermissionsIndexRoute
+  adminPermissionsPermissionIdUpdateIndexRoute: typeof adminPermissionsPermissionIdUpdateIndexRoute
 }
 
 const adminRouteRouteChildren: adminRouteRouteChildren = {
   adminDashboardIndexRoute: adminDashboardIndexRoute,
   adminPermissionsIndexRoute: adminPermissionsIndexRoute,
+  adminPermissionsPermissionIdUpdateIndexRoute:
+    adminPermissionsPermissionIdUpdateIndexRoute,
 }
 
 const adminRouteRouteWithChildren = adminRouteRoute._addFileChildren(

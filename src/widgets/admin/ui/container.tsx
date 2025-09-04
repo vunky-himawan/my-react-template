@@ -1,4 +1,5 @@
 import type { TBreadcrumbItem } from "@/shared/types/breadcrumb";
+import { Loading } from "@/shared/ui/loading";
 import { Separator } from "@/shared/ui/separator";
 import { SidebarTrigger } from "@/shared/ui/sidebar";
 import { AdminHeader } from "@/widgets/admin/ui/header";
@@ -11,10 +12,12 @@ interface AdminPageProps {
   description?: ReactNode;
   children: ReactNode;
   topAction?: ReactNode;
+  isLoading?: boolean;
 }
 
 export const AdminPage: FC<AdminPageProps> = ({
   children,
+  isLoading,
   breadcrumbs,
   header,
   title,
@@ -35,7 +38,14 @@ export const AdminPage: FC<AdminPageProps> = ({
         </div>
         {topAction}
       </div>
-      <div className="flex-1 relative">{children}</div>
+      <div className="flex-1 relative h-full">
+        {isLoading && (
+          <div className="absolute inset-0 flex items-center justify-center">
+            <Loading />
+          </div>
+        )}
+        {!isLoading && children}
+      </div>
     </div>
   );
 };

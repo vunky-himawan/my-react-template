@@ -5,6 +5,8 @@ import { Search } from "@/shared/ui/search";
 import { Loading } from "@/shared/ui/loading";
 import { PermissionCard } from "./card";
 import { PaginationControl } from "@/shared/ui/pagination/pagination-control";
+import { useToast } from "@/shared/hooks/use-toast";
+import { Button } from "@/shared/ui/button";
 
 interface Props {
   data?: TSource<Permission[]>;
@@ -18,6 +20,7 @@ interface Props {
 
 export const ListPermission: FC<Props> = ({ data, isLoading, handleChange, search }) => {
   const { data: permissions, meta } = data || {};
+  const { showToast } = useToast();
 
   return (
     <>
@@ -48,6 +51,7 @@ export const ListPermission: FC<Props> = ({ data, isLoading, handleChange, searc
           paginationMeta={meta}
         />
       )}
+      <Button onClick={() => showToast("warning", "Toast")}>Toast</Button>
     </>
   );
 };

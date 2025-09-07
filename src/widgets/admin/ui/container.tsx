@@ -5,7 +5,7 @@ import { SidebarTrigger } from "@/shared/ui/sidebar";
 import { AdminHeader } from "@/widgets/admin/ui/header";
 import type { FC, ReactNode } from "react";
 
-interface AdminPageProps {
+interface AdminPageContainerProps {
   breadcrumbs?: TBreadcrumbItem[];
   header?: ReactNode;
   title?: ReactNode;
@@ -15,7 +15,7 @@ interface AdminPageProps {
   isLoading?: boolean;
 }
 
-export const AdminPage: FC<AdminPageProps> = ({
+export const AdminPageContainer: FC<AdminPageContainerProps> = ({
   children,
   isLoading,
   breadcrumbs,

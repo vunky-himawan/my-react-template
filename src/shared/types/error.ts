@@ -10,4 +10,11 @@ export interface ErrorResponse {
   statusCode: number | string | undefined;
   message: string;
   error: APP_ERROR_ENUM;
+  details?: TDetailError[];
 }
+
+export type TDetailError = {
+  code: string;
+  field: string;
+  message: string;
+};

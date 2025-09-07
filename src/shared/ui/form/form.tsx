@@ -9,9 +9,9 @@ import {
   type FieldValues,
 } from "react-hook-form";
 
-import { FormFieldContext, FormItemContext, useFormField } from "../../hooks/use-form-field";
-import { cn } from "../../lib/utils";
 import { Label } from "../label";
+import { FormFieldContext, FormItemContext, useFormField } from "@/shared/hooks/use-form-field";
+import { cn } from "@/shared/lib/utils";
 
 const Form = FormProvider;
 

@@ -5,8 +5,10 @@ import { Search } from "@/shared/ui/search";
 import { Loading } from "@/shared/ui/loading";
 import { PermissionCard } from "./card";
 import { PaginationControl } from "@/shared/ui/pagination/pagination-control";
-import { useToast } from "@/shared/hooks/use-toast";
+import { SheetTrigger } from "@/shared/ui/sheet";
 import { Button } from "@/shared/ui/button";
+import { Ellipsis } from "lucide-react";
+import { usePermission } from "../model/context";
 
 interface Props {
   data?: TSource<Permission[]>;
@@ -20,7 +22,6 @@ interface Props {
 
 export const ListPermission: FC<Props> = ({ data, isLoading, handleChange, search }) => {
   const { data: permissions, meta } = data || {};
-  const { showToast } = useToast();
 
   return (
     <>
@@ -38,7 +39,11 @@ export const ListPermission: FC<Props> = ({ data, isLoading, handleChange, searc
         <div className="grid grid-cols-1 my-3 gap-3 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
           {permissions && permissions?.length > 0 ? (
             permissions.map((permission) => (
-              <PermissionCard key={permission.id} permission={permission} />
+              <PermissionCard
+                key={permission.id}
+                permission={permission}
+                actions={<PermissionAction permission={permission} />}
+              />
             ))
           ) : (
             <p>No result.</p>
@@ -51,7 +56,18 @@ export const ListPermission: FC<Props> = ({ data, isLoading, handleChange, searc
           paginationMeta={meta}
         />
       )}
-      <Button onClick={() => showToast("warning", "Toast")}>Toast</Button>
     </>
+  );
+};
+
+const PermissionAction = ({ permission }: { permission: Permission }) => {
+  const { setPermission } = usePermission();
+
+  return (
+    <SheetTrigger asChild>
+      <Button variant={"outline"} size={"icon"} onClick={() => setPermission(permission)}>
+        <Ellipsis />
+      </Button>
+    </SheetTrigger>
   );
 };

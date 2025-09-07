@@ -1,2 +1,2 @@
-export * from "./find-many";
 export * from "./queries";
+export * from "./update";

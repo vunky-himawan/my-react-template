@@ -1,7 +1,6 @@
 {
-  "name": "React Vite Template",
+  "name": "Quiz App",
   "author": "Vunky Himawan",
-  "repository": "https://github.com/vunky-himawan/react-vite-template",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -27,6 +26,7 @@
     "@radix-ui/react-select": "^2.2.6",
     "@radix-ui/react-separator": "^1.1.7",
     "@radix-ui/react-slot": "^1.2.3",
+    "@radix-ui/react-switch": "^1.2.6",
     "@radix-ui/react-tooltip": "^1.2.7",
     "@sentry/browser": "^10.8.0",
     "@tailwindcss/vite": "^4.1.11",

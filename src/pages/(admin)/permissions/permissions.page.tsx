@@ -1,25 +1,31 @@
-import { ListPermission, permissionQueries } from "@/entities/permission";
-import { PermissionProvider } from "@/entities/permission/model/context";
-import { PermissionDetail } from "@/entities/permission/ui/detail";
+import {
+  ListPermission,
+  PermissionDetail,
+  PermissionProvider,
+  permissionQueries,
+} from "@/entities/permission";
 import { useQueryFilters } from "@/features/filter";
 import { Sheet } from "@/shared/ui/sheet";
 import { makePagination } from "@/shared/utils/pagination";
-import { AdminPage } from "@/widgets/admin/ui/container";
+import { AdminPageContainer } from "@/widgets/admin/ui/container";
 import { useQuery } from "@tanstack/react-query";
 
 export const PermissionsPage = () => {
   const { pagination, handleChange, search } = useQueryFilters();
 
   const { isLoading, data } = useQuery(
-    permissionQueries.findMany({
-      ...makePagination(pagination),
-      search,
-    }),
+    permissionQueries.findMany(
+      {
+        ...makePagination(pagination),
+        search,
+      },
+      { enabled: true },
+    ),
   );
 
   return (
     <PermissionProvider>
-      <AdminPage
+      <AdminPageContainer
         breadcrumbs={[
           { label: "Dashboard", path: "/dashboard" },
           {
@@ -39,7 +45,7 @@ export const PermissionsPage = () => {
           />
           <PermissionDetail />
         </Sheet>
-      </AdminPage>
+      </AdminPageContainer>
     </PermissionProvider>
   );
 };

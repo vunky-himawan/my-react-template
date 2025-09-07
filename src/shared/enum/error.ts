@@ -8,6 +8,7 @@ export enum APP_ERROR_ENUM {
   FORBIDDEN = "Forbidden",
   TOO_MANY_REQUESTS = "TooManyRequests",
   UNPROCESSABLE_ENTITY = "UnprocessableEntity",
+  ZOD_VALIDATION = "ZodValidationException",
 
   // Non-HTTP / frontend
   NETWORK_ERROR = "NetworkError",

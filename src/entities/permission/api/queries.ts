@@ -4,10 +4,11 @@ import type { TBaseQueryParams } from "@/shared/types/query-params";
 import { find } from "./find";
 
 export const permissionQueries = {
-  findMany: (params: TBaseQueryParams) =>
+  findMany: (params: TBaseQueryParams, options?: { enabled?: boolean }) =>
     queryOptions({
       queryKey: permissionQueryKeys.list(params),
       queryFn: () => findMany(params),
+      enabled: options?.enabled,
     }),
   find: (id: number) =>
     queryOptions({

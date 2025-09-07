@@ -15,6 +15,8 @@ export const ERROR_MESSAGES: Record<APP_ERROR_ENUM, string> = {
     "Whoa, you’re going too fast! Give our server a moment and try again.",
   [APP_ERROR_ENUM.UNPROCESSABLE_ENTITY]:
     "We can’t process your data. Check your input and try again!",
+  [APP_ERROR_ENUM.ZOD_VALIDATION]:
+    "There’s an issue with your data. Please review and correct it before proceeding.",
 
   [APP_ERROR_ENUM.NETWORK_ERROR]:
     "Your internet connection is acting up. Check your network and try again!",

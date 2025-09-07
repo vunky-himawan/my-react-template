@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as adminRouteRouteImport } from './routes/(admin)/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as publicAuthRouteRouteImport } from './routes/(public)/auth/route'
+import { Route as adminRolesIndexRouteImport } from './routes/(admin)/roles/index'
 import { Route as adminPermissionsIndexRouteImport } from './routes/(admin)/permissions/index'
 import { Route as adminDashboardIndexRouteImport } from './routes/(admin)/dashboard/index'
 import { Route as publicAuthSignInIndexRouteImport } from './routes/(public)/auth/sign-in/index'
@@ -30,6 +31,11 @@ const publicAuthRouteRoute = publicAuthRouteRouteImport.update({
   id: '/(public)/auth',
   path: '/auth',
   getParentRoute: () => rootRouteImport,
+} as any)
+const adminRolesIndexRoute = adminRolesIndexRouteImport.update({
+  id: '/roles/',
+  path: '/roles/',
+  getParentRoute: () => adminRouteRoute,
 } as any)
 const adminPermissionsIndexRoute = adminPermissionsIndexRouteImport.update({
   id: '/permissions/',
@@ -58,6 +64,7 @@ export interface FileRoutesByFullPath {
   '/auth': typeof publicAuthRouteRouteWithChildren
   '/dashboard': typeof adminDashboardIndexRoute
   '/permissions': typeof adminPermissionsIndexRoute
+  '/roles': typeof adminRolesIndexRoute
   '/auth/sign-in': typeof publicAuthSignInIndexRoute
   '/permissions/$permissionId/update': typeof adminPermissionsPermissionIdUpdateIndexRoute
 }
@@ -66,6 +73,7 @@ export interface FileRoutesByTo {
   '/auth': typeof publicAuthRouteRouteWithChildren
   '/dashboard': typeof adminDashboardIndexRoute
   '/permissions': typeof adminPermissionsIndexRoute
+  '/roles': typeof adminRolesIndexRoute
   '/auth/sign-in': typeof publicAuthSignInIndexRoute
   '/permissions/$permissionId/update': typeof adminPermissionsPermissionIdUpdateIndexRoute
 }
@@ -76,6 +84,7 @@ export interface FileRoutesById {
   '/(public)/auth': typeof publicAuthRouteRouteWithChildren
   '/(admin)/dashboard/': typeof adminDashboardIndexRoute
   '/(admin)/permissions/': typeof adminPermissionsIndexRoute
+  '/(admin)/roles/': typeof adminRolesIndexRoute
   '/(public)/auth/sign-in/': typeof publicAuthSignInIndexRoute
   '/(admin)/permissions/$permissionId/update/': typeof adminPermissionsPermissionIdUpdateIndexRoute
 }
@@ -86,6 +95,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/dashboard'
     | '/permissions'
+    | '/roles'
     | '/auth/sign-in'
     | '/permissions/$permissionId/update'
   fileRoutesByTo: FileRoutesByTo
@@ -94,6 +104,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/dashboard'
     | '/permissions'
+    | '/roles'
     | '/auth/sign-in'
     | '/permissions/$permissionId/update'
   id:
@@ -103,6 +114,7 @@ export interface FileRouteTypes {
     | '/(public)/auth'
     | '/(admin)/dashboard/'
     | '/(admin)/permissions/'
+    | '/(admin)/roles/'
     | '/(public)/auth/sign-in/'
     | '/(admin)/permissions/$permissionId/update/'
   fileRoutesById: FileRoutesById
@@ -135,6 +147,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/auth'
       preLoaderRoute: typeof publicAuthRouteRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/(admin)/roles/': {
+      id: '/(admin)/roles/'
+      path: '/roles'
+      fullPath: '/roles'
+      preLoaderRoute: typeof adminRolesIndexRouteImport
+      parentRoute: typeof adminRouteRoute
     }
     '/(admin)/permissions/': {
       id: '/(admin)/permissions/'
@@ -170,12 +189,14 @@ declare module '@tanstack/react-router' {
 interface adminRouteRouteChildren {
   adminDashboardIndexRoute: typeof adminDashboardIndexRoute
   adminPermissionsIndexRoute: typeof adminPermissionsIndexRoute
+  adminRolesIndexRoute: typeof adminRolesIndexRoute
   adminPermissionsPermissionIdUpdateIndexRoute: typeof adminPermissionsPermissionIdUpdateIndexRoute
 }
 
 const adminRouteRouteChildren: adminRouteRouteChildren = {
   adminDashboardIndexRoute: adminDashboardIndexRoute,
   adminPermissionsIndexRoute: adminPermissionsIndexRoute,
+  adminRolesIndexRoute: adminRolesIndexRoute,
   adminPermissionsPermissionIdUpdateIndexRoute:
     adminPermissionsPermissionIdUpdateIndexRoute,
 }

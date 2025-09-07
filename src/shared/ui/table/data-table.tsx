@@ -4,7 +4,6 @@ import { Search } from "@/shared/ui/search";
 import type { TFilterItem } from "@/shared/types/filter";
 import { TanstackTableView } from "@/shared/ui/table/tanstack-table-view";
 import type { TSource } from "@/shared/types/pagination";
-import type { TBaseQueryParams } from "@/shared/types/query-params";
 import { PaginationControl } from "@/shared/ui/pagination/pagination-control";
 import { FilterControl } from "@/features/filter";
 
@@ -16,7 +15,6 @@ interface IDataTableProps<T> {
   search?: string;
   withSearch?: boolean;
   placeholderSearch?: string;
-  pagination?: Omit<TBaseQueryParams, "search">;
   handleChange?: {
     onFilterChange: (newFilters: Record<string, string | number | undefined>) => void;
     onSortingChange: (sortKey: string, order: "asc" | "desc") => void;
@@ -34,7 +32,6 @@ export const DataTable = <T,>({
   placeholderSearch = "Search...",
   withSearch = true,
   handleChange,
-  pagination,
 }: IDataTableProps<T>) => {
   const { data, meta } = source || {};
 
@@ -65,12 +62,6 @@ export const DataTable = <T,>({
     columns: enableRowSelection ? [selectableColumn, ...columns] : columns,
     getCoreRowModel: getCoreRowModel(),
     pageCount: meta?.totalPages,
-    state: {
-      pagination: {
-        pageIndex: pagination?.page || 1,
-        pageSize: pagination?.limit || 10,
-      },
-    },
     manualPagination: true,
     manualFiltering: true,
     manualSorting: true,

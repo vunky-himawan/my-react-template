@@ -1,15 +1,15 @@
-import { permissionQueries } from "@/entities/permission";
-import { permissionQueryKeys } from "@/entities/permission/api";
-import { permissionMutations } from "@/features/permission/api/mutations";
 import {
+  permissionQueries,
+  permissionQueryKeys,
+  updatePermission,
+  UpdatePermissionFormField,
   UpdatePermissionSchema,
   type TUpdatePermissionSchema,
-} from "@/features/permission/model/types";
-import { UpdatePermissionFormField } from "@/features/permission/ui/form";
+} from "@/entities/permission";
 import { useToast } from "@/shared/hooks/use-toast";
 import { queryClient } from "@/shared/lib/tanstack-query/client";
 import { DynamicForm } from "@/shared/ui/form/dynamic-form";
-import { AdminPage } from "@/widgets/admin/ui/container";
+import { AdminPageContainer } from "@/widgets/admin/ui/container";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useNavigate } from "@tanstack/react-router";
 import { getRouteApi } from "@tanstack/react-router";
@@ -23,19 +23,17 @@ const UpdatePermissionPage = () => {
 
   const { data, isLoading } = useQuery(permissionQueries.find(permissionId));
 
-  const { mutate } = useMutation(
-    permissionMutations.updatePermission({
-      onSuccess() {
-        queryClient.invalidateQueries({ queryKey: permissionQueryKeys.all });
-
-        showToast("success", "Update permission successfully.");
-        navigate({ to: "/permissions" });
-      },
-      onError() {
-        showToast("error", "Error updating permission");
-      },
-    }),
-  );
+  const { mutate } = useMutation({
+    mutationFn: updatePermission,
+    onSuccess: async () => {
+      queryClient.invalidateQueries({ queryKey: permissionQueryKeys.all });
+      await navigate({ to: "/permissions" });
+      showToast("Update permission successfully.", "success");
+    },
+    onError: () => {
+      showToast("Error updating permission", "error");
+    },
+  });
 
   const handleSubmit = (data: TUpdatePermissionSchema) => {
     delete data.name;
@@ -43,7 +41,7 @@ const UpdatePermissionPage = () => {
   };
 
   return (
-    <AdminPage
+    <AdminPageContainer
       title="Update Permission"
       description="Update permission"
       breadcrumbs={[
@@ -60,7 +58,7 @@ const UpdatePermissionPage = () => {
       >
         <UpdatePermissionFormField />
       </DynamicForm>
-    </AdminPage>
+    </AdminPageContainer>
   );
 };
 

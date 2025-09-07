@@ -28,6 +28,8 @@ export const DeleteModal: FC<Props> = ({ id }) => {
   const { mutate } = useMutation(
     roleMutations.delete({
       onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: roleQueryKeys.all });
+
         showToast("Role deleted successfully", "success");
       },
       onError: showError,
@@ -36,8 +38,6 @@ export const DeleteModal: FC<Props> = ({ id }) => {
 
   const handleDelete = async (id: number) => {
     await mutate(id);
-
-    queryClient.invalidateQueries({ queryKey: roleQueryKeys.all });
   };
 
   return (

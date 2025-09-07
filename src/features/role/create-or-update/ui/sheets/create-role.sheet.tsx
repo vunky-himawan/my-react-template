@@ -1,5 +1,5 @@
 import { permissionQueries } from "@/entities/permission";
-import { roleMutations, roleQueries, roleQueryKeys } from "@/entities/role";
+import { roleMutations, roleQueryKeys } from "@/entities/role";
 import { CreateOrUpdateRoleForm } from "@/features/role/create-or-update/ui/form/form";
 import { CreateOrUpdateRoleFormFields } from "@/features/role/create-or-update/ui/form/form-field";
 import { useDebounce } from "@/shared/hooks/use-debounce";
@@ -7,7 +7,6 @@ import { useErrorToast } from "@/shared/hooks/use-error-toast";
 import { useToast } from "@/shared/hooks/use-toast";
 import { queryClient } from "@/shared/lib/tanstack-query/client";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { useSearch } from "@tanstack/react-router";
 import { memo, useState, type FC } from "react";
 
 interface Props {
@@ -15,8 +14,7 @@ interface Props {
   onClose?: () => void;
 }
 
-export const CreateOrUpdateRoleSheetContent: FC<Props> = memo(({ enabled, onClose }) => {
-  const { id } = useSearch({ from: "/(admin)/roles/" });
+export const CreateRoleSheetContent: FC<Props> = memo(({ enabled, onClose }) => {
   const { showToast } = useToast();
   const { showError } = useErrorToast();
   const [search, setSearch] = useState("");
@@ -50,13 +48,8 @@ export const CreateOrUpdateRoleSheetContent: FC<Props> = memo(({ enabled, onClos
     }),
   );
 
-  const { data: roleDefault } = useQuery(roleQueries.detail(id));
-
   return (
-    <CreateOrUpdateRoleForm
-      onSubmit={mutate}
-      defaultValues={{ name: roleDefault?.name, permissions: roleDefault?.permissions }}
-    >
+    <CreateOrUpdateRoleForm onSubmit={mutate} defaultValues={{ name: "", permissions: [] }}>
       <CreateOrUpdateRoleFormFields
         permissions={data?.data}
         search={search ?? ""}

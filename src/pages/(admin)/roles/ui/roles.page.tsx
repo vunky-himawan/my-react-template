@@ -12,7 +12,8 @@ import { useRouter, useSearch } from "@tanstack/react-router";
 import { DataTable } from "@/shared/ui/table/data-table";
 import { RoleColumnFactory } from "@/features/role/table/ui/role-column-factory";
 import { RoleSheetContent } from "@/features/role/create-or-update/ui/sheets/role.sheet";
-import { CreateOrUpdateRoleSheetContent } from "@/features/role/create-or-update/ui/sheets/create-or-update-role.sheet";
+import { CreateRoleSheetContent } from "@/features/role/create-or-update/ui/sheets/create-role.sheet";
+import { UpdateRoleSheetContent } from "@/features/role/create-or-update/ui/sheets/update-role.sheet";
 
 const RolesPage = () => {
   const { navigate } = useRouter();
@@ -69,10 +70,17 @@ const RolesPage = () => {
         />
       </AdminPageContainer>
 
-      {/* Create Role Sheet */}
+      {/* Show Role Sheet */}
       {action && action === "show" && id && <RoleSheetContent />}
-      {action !== "show" && (
-        <CreateOrUpdateRoleSheetContent
+
+      {/* Update Role Sheet */}
+      {action && action === "update" && id && (
+        <UpdateRoleSheetContent enabled={sheetIsOpen} onClose={() => setSheetIsOpen(false)} />
+      )}
+
+      {/* Create Role Sheet */}
+      {!action && !id && (
+        <CreateRoleSheetContent
           enabled={sheetIsOpen}
           onClose={() => {
             setSheetIsOpen(false);

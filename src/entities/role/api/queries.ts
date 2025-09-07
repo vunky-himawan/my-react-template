@@ -17,7 +17,7 @@ export const roleQueries = {
 };
 
 export const roleQueryKeys = {
-  all: ["roles"],
+  all: ["roles"] as const,
   list: (params: TBaseQueryParams) => [...roleQueryKeys.all, params],
   details: (id: number) => [...roleQueryKeys.all, "detail", id],
 };
